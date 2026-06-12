@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход в админ-панель - PFC1Roblox</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Titillium+Web:wght@600;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0e0e16 0%, #15151e 50%, #0e0e16 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0.1;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(225, 6, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.3) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .login-form {
+      position: relative;
+      z-index: 10;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 1rem;
+      padding: 3rem 2rem;
+      max-width: 400px;
+      width: 90%;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.1);
+    }
+
+    .login-form h1 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--color-red), var(--color-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .login-form p {
+      text-align: center;
+      color: var(--color-muted);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--color-heading);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--color-border);
+      border-radius: 0.5rem;
+      color: var(--color-heading);
+      font-size: 1rem;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--color-red);
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .error-message {
+      display: none;
+      background: rgba(225, 6, 0, 0.1);
+      border: 1px solid var(--color-red);
+      color: var(--color-red);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .error-message.show {
+      display: block;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 0.75rem;
+      background: linear-gradient(135deg, var(--color-red), var(--color-red));
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: 0 0 20px rgba(225, 6, 0, 0.3);
+    }
+
+    .login-form button:hover:not(:disabled) {
+      box-shadow: 0 0 30px rgba(225, 6, 0, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .login-form button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .info-text {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-bg"></div>
+    
+    <form class="login-form" id="loginForm">
+      <h1>PFC1Roblox</h1>
+      <p>Админ-панель</p>
+      
+      <div class="error-message" id="errorMessage"></div>
+      
+      <div class="form-group">
+        <label for="password">Пароль администратора</label>
+        <input 
+          type="password" 
+          id="password" 
+          placeholder="Введите пароль" 
+          autocomplete="off"
+          required
+        >
+      </div>
+      
+      <button type="submit" id="loginBtn">Войти</button>
+      
+      <div class="info-text">
+        Доступ только для администраторов лиги
+      </div>
+    </form>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const passwordInput = document.getElementById('password');
+    const loginBtn = document.getElementById('loginBtn');
+    const errorMessage = document.getElementById('errorMessage');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'Проверка...';
+      errorMessage.classList.remove('show');
+      
+      const password = passwordInput.value;
+      const success = await login(password);
+      
+      if (success) {
+        // Перенаправить в админ-панель
+        window.location.href = 'index.html';
+      } else {
+        errorMessage.textContent = 'Неверный пароль. Попробуйте снова.';
+        errorMessage.classList.add('show');
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+      
+      loginBtn.disabled = false;
+      loginBtn.textContent = 'Войти';
+    });
+
+    // Фокус на инпут при загрузке
+    window.addEventListener('load', () => {
+      passwordInput.focus();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админ-панель - PFC1Roblox</title>
+  <link rel="icon" href="../logos/pfcnewlogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Titillium+Web:wght@300;400;600;700;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+
+</head>
+<body class="admin-body">
+  <div class="admin-shell">
+  <header class="admin-header">
+    <h1>PFC1Roblox Админ-панель</h1>
+    <div class="header-right">
+      <div class="session-info">
+        Сессия: <span class="time" id="sessionTime">30:00</span>
+      </div>
+      <button class="btn btn-danger" onclick="logout()">Выход</button>
+    </div>
+  </header>
+
+  <aside class="admin-tabs">
+    <div class="nav-item active" onclick="switchTab('drivers')">👨‍✈️ Пилоты</div>
+    <div class="nav-item" onclick="switchTab('teams')">🏁 Команды</div>
+    <div class="nav-item" onclick="switchTab('calendar')">📅 Календарь</div>
+    <div class="nav-item" onclick="switchTab('results')">🏆 Результаты</div>
+    <div class="nav-item" onclick="switchTab('news')">📰 Новости</div>
+    <div class="nav-item" onclick="switchTab('standings')">📊 Таблица</div>
+    <div class="nav-item" onclick="switchTab('settings')">⚙️ Настройки</div>
+  </aside>
+
+  <main class="admin-main">
+    <!-- ПИЛОТЫ -->
+    <section id="drivers" class="section active">
+      <div class="section-header">
+        <h2>Управление пилотами</h2>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="openDriverModal()">+ Добавить пилота</button>
+        </div>
+      </div>
+      <div class="table-container">
+        <table id="driversTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Имя</th>
+              <th>Фамилия</th>
+              <th>Номер</th>
+              <th>Команда</th>
+              <th>Национальность</th>
+              <th>Очки</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- КОМАНДЫ -->
+    <section id="teams" class="section">
+      <div class="section-header">
+        <h2>Управление командами</h2>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="openTeamModal()">+ Добавить команду</button>
+        </div>
+      </div>
+      <div class="table-container">
+        <table id="teamsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Название</th>
+              <th>Страна</th>
+              <th>Цвет</th>
+              <th>Пилоты</th>
+              <th>Очки</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- КАЛЕНДАРЬ -->
+    <section id="calendar" class="section">
+      <div class="section-header">
+        <h2>Календарь сезона</h2>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="openRoundModal()">+ Добавить этап</button>
+        </div>
+      </div>
+      <div class="table-container">
+        <table id="calendarTable">
+          <thead>
+            <tr>
+              <th>Этап</th>
+              <th>Дата</th>
+              <th>Трасса</th>
+              <th>Страна</th>
+              <th>Часовой пояс</th>
+              <th>Статус</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- РЕЗУЛЬТАТЫ -->
+    <section id="results" class="section">
+      <div class="section-header">
+        <h2>Результаты гонок</h2>
+      </div>
+      <div class="form-group">
+        <label>Выберите этап</label>
+        <select id="roundSelect" onchange="loadRoundResults()">
+          <option value="">-- Выберите этап --</option>
+        </select>
+      </div>
+      <div class="table-container">
+        <table id="resultsTable">
+          <thead>
+            <tr>
+              <th>Позиция</th>
+              <th>Пилот</th>
+              <th>Команда</th>
+              <th>Старт</th>
+              <th>Финиш</th>
+              <th>Очки</th>
+              <th>БК</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <button class="btn btn-primary mt-3" onclick="saveResults()">Сохранить результаты</button>
+    </section>
+
+    <!-- НОВОСТИ -->
+    <section id="news" class="section">
+      <div class="section-header">
+        <h2>Управление новостями</h2>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="openNewsModal()">+ Добавить новость</button>
+        </div>
+      </div>
+      <div class="table-container">
+        <table id="newsTable">
+          <thead>
+            <tr>
+              <th>Заголовок</th>
+              <th>Категория</th>
+              <th>Дата</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ТАБЛИЦА ЧЕМПИОНАТА -->
+    <section id="standings" class="section">
+      <div class="section-header">
+        <h2>Таблица чемпионата</h2>
+        <div class="actions">
+          <button class="btn btn-secondary" onclick="recalculateStandings()">Пересчитать</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="label">Пилотов</div>
+          <div class="number" id="driversCount">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Команд</div>
+          <div class="number" id="teamsCount">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Этапов</div>
+          <div class="number" id="roundsCount">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Новостей</div>
+          <div class="number" id="newsCount">0</div>
+        </div>
+      </div>
+      <h3>Личный зачёт</h3>
+      <div class="table-container">
+        <table id="driverStandingsTable">
+          <thead>
+            <tr>
+              <th>Позиция</th>
+              <th>Пилот</th>
+              <th>Команда</th>
+              <th>Очки</th>
+              <th>Побед</th>
+              <th>Подиумов</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- НАСТРОЙКИ -->
+    <section id="settings" class="section">
+      <h2>Настройки</h2>
+      <div class="card mt-3">
+        <h3>Смена пароля</h3>
+        <div class="form-group mt-2">
+          <label>Новый пароль</label>
+          <input type="password" id="newPassword" placeholder="Введите новый пароль">
+        </div>
+        <button class="btn btn-primary" onclick="changePassword()">Сохранить пароль</button>
+      </div>
+      <div class="card mt-3">
+        <h3>Экспорт данных</h3>
+        <p>Скачайте все данные лиги в формате JSON</p>
+        <button class="btn btn-secondary" onclick="exportData()">📥 Экспортировать данные</button>
+      </div>
+      <div class="card mt-3">
+        <h3>Импорт данных</h3>
+        <p>Загрузите ранее экспортированные данные</p>
+        <input type="file" id="importFile" accept=".json" style="margin-bottom: 1rem;">
+        <button class="btn btn-secondary" onclick="importData()">📤 Импортировать данные</button>
+      </div>
+      <div class="card mt-3">
+        <h3>Очистить все данные</h3>
+        <p style="color: var(--accent-red);">⚠️ Это действие невозможно отменить!</p>
+        <button class="btn btn-danger" onclick="if(confirm('Вы уверены?')) { DataManager.clearAll(); location.reload(); }">Очистить</button>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <!-- МОДАЛЬНЫЕ ОКНА -->
+  <div class="modal" id="driverModal">
+    <div class="modal-content">
+      <h3 id="driverModalTitle">Добавить пилота</h3>
+      <form id="driverForm" onsubmit="saveDriver(event)">
+        <div class="form-row form-row--two">
+          <div class="form-group">
+            <label>Имя</label>
+            <input type="text" id="driverFirstName" placeholder="Макс" required>
+          </div>
+          <div class="form-group">
+            <label>Фамилия</label>
+            <input type="text" id="driverLastName" placeholder="Верстаппен" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Номер</label>
+          <input type="number" id="driverNumber" required>
+        </div>
+        <div class="form-group">
+          <label>Команда</label>
+          <select id="driverTeam" required></select>
+        </div>
+        <div class="form-group">
+          <label>Национальность</label>
+          <input type="text" id="driverNationality" placeholder="RU, BY, KZ...">
+        </div>
+        <div class="form-group">
+          <label>Фото пилота (1080×1420, обрезка выше торса)</label>
+          <input type="file" id="driverAvatar" accept="image/png, image/jpeg" onchange="previewDriverAvatar(event)">
+          <small class="text-muted">Рекомендуемый размер: 1080×1420 px. Фото обрезается выше торса, как на F1.com. Хранится в БД в формате Base64.</small>
+          <div style="margin-top:.6rem;display:flex;align-items:center;gap:.8rem">
+            <img id="driverAvatarPreview" src="../logos/default-driver.png" alt="Превью"
+                 style="width:84px;height:110px;object-fit:cover;object-position:center 20%;border:1px solid var(--color-border);border-radius:var(--radius);background:var(--color-surface-soft)"
+                 onerror="this.src='../logos/default-driver.png'">
+            <button type="button" class="btn btn-secondary" onclick="clearDriverAvatar()">Убрать фото</button>
+          </div>
+          <input type="hidden" id="driverAvatarData">
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('driverModal')">Отмена</button>
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="teamModal">
+    <div class="modal-content">
+      <h3 id="teamModalTitle">Добавить команду</h3>
+      <form id="teamForm" onsubmit="saveTeam(event)">
+        <div class="form-group"><label>Название</label><input type="text" id="teamName" required></div>
+        <div class="form-group"><label>Короткое имя</label><input type="text" id="teamShortName" maxlength="4" required></div>
+        <div class="form-group"><label>URL Логотипа</label><input type="text" id="teamLogoUrl" placeholder="https://example.com/team-logo.png"></div>
+        <div class="form-group"><label>Страна команды</label><input type="text" id="teamCountry" placeholder="Германия"></div>
+        <div class="form-group"><label>Цвет</label><input type="color" id="teamColor" value="#E10600"></div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('teamModal')">Отмена</button>
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="roundModal">
+    <div class="modal-content">
+      <h3 id="roundModalTitle">Добавить этап</h3>
+      <form id="roundForm" onsubmit="saveRound(event)">
+        <div class="form-group"><label>Номер этапа</label><input type="number" id="roundNumber" min="1" required></div>
+        <div class="form-group"><label>Трасса</label><input type="text" id="roundTrack" required></div>
+        <div class="form-group"><label>Страна проведения</label><input type="text" id="roundTrackCountry" placeholder="Монако" required></div>
+        <div class="form-group"><label>Часовой пояс трассы</label><input type="text" id="roundTimezone" placeholder="Europe/London" required></div>
+        <div class="form-group"><label>Дата</label><input type="date" id="roundDate" required></div>
+        <div class="form-group">
+          <label>Статус</label>
+          <select id="roundStatus">
+            <option value="upcoming">Предстоит</option>
+            <option value="live">Прямой эфир</option>
+            <option value="finished">Завершено</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('roundModal')">Отмена</button>
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="newsModal">
+    <div class="modal-content">
+      <h3 id="newsModalTitle">Добавить новость</h3>
+      <form id="newsForm" onsubmit="saveNews(event)">
+        <div class="form-group"><label>Заголовок</label><input type="text" id="newsTitle" required></div>
+        <div class="form-group"><label>Категория</label><input type="text" id="newsCategory" required></div>
+        <div class="form-group"><label>Текст</label><textarea id="newsContent" rows="6" required></textarea></div>
+        <div class="form-group"><label>URL изображения</label><input type="url" id="newsImage"></div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('newsModal')">Отмена</button>
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/DataManager.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/animations.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
