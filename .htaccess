@@ -8,5 +8,10 @@ AddDefaultCharset UTF-8
   Require all denied
 </FilesMatch>
 
+# Запретить прямой доступ к локальному конфигу с паролем БД
+<FilesMatch "^config\.local\.php$">
+  Require all denied
+</FilesMatch>
+
 # Запретить листинг директорий
 Options -Indexes

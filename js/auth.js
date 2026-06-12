@@ -21,7 +21,7 @@ async function login(password, username = 'Admin') {
     const res = await fetch(`${ADMIN_CONFIG.apiBase}auth.php`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'same-origin',
+      credentials: 'include',
       body: JSON.stringify({ action: 'login', username, password })
     });
     const data = await res.json().catch(() => ({}));
@@ -75,7 +75,7 @@ function isAdmin() {
 async function checkAdmin() {
   try {
     const res = await fetch(`${ADMIN_CONFIG.apiBase}auth.php?action=check`, {
-      credentials: 'same-origin'
+      credentials: 'include'
     });
     const data = await res.json().catch(() => ({}));
     return Boolean(data.authenticated) && data.role === 'admin';
@@ -100,7 +100,7 @@ async function logout() {
     await fetch(`${ADMIN_CONFIG.apiBase}auth.php`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'same-origin',
+      credentials: 'include',
       body: JSON.stringify({ action: 'logout' })
     });
   } catch (e) {

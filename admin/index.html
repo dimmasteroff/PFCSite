@@ -268,6 +268,18 @@
           <label>Национальность</label>
           <input type="text" id="driverNationality" placeholder="RU, BY, KZ...">
         </div>
+        <div class="form-group">
+          <label>Фото пилота (1080×1420, обрезка выше торса)</label>
+          <input type="file" id="driverAvatar" accept="image/png, image/jpeg" onchange="previewDriverAvatar(event)">
+          <small class="text-muted">Рекомендуемый размер: 1080×1420 px. Фото обрезается выше торса, как на F1.com. Хранится в БД в формате Base64.</small>
+          <div style="margin-top:.6rem;display:flex;align-items:center;gap:.8rem">
+            <img id="driverAvatarPreview" src="../logos/default-driver.png" alt="Превью"
+                 style="width:84px;height:110px;object-fit:cover;object-position:center 20%;border:1px solid var(--color-border);border-radius:var(--radius);background:var(--color-surface-soft)"
+                 onerror="this.src='../logos/default-driver.png'">
+            <button type="button" class="btn btn-secondary" onclick="clearDriverAvatar()">Убрать фото</button>
+          </div>
+          <input type="hidden" id="driverAvatarData">
+        </div>
         <div class="form-actions">
           <button type="button" class="btn btn-secondary" onclick="closeModal('driverModal')">Отмена</button>
           <button type="submit" class="btn btn-primary">Сохранить</button>

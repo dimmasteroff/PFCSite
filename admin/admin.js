@@ -84,13 +84,55 @@ async function loadDrivers() {
   });
 }
 
+const DEFAULT_DRIVER_AVATAR = '../logos/default-driver.png';
+
 function openDriverModal() {
   editingId = null;
   editingType = 'driver';
   document.getElementById('driverModalTitle').textContent = 'Добавить пилота';
   document.getElementById('driverForm').reset();
+  // Сброс фото
+  document.getElementById('driverAvatarData').value = '';
+  document.getElementById('driverAvatarPreview').src = DEFAULT_DRIVER_AVATAR;
   loadTeamSelect();
   document.getElementById('driverModal').classList.add('active');
+}
+
+/**
+ * Предпросмотр и конвертация загруженного фото пилота в Base64.
+ * Base64 удобнее для shared-хостинга: фото хранится прямо в БД (поле avatar),
+ * не нужно настраивать загрузку файлов на диск.
+ */
+function previewDriverAvatar(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  if (!['image/png', 'image/jpeg'].includes(file.type)) {
+    alert('Допустимы только изображения PNG или JPEG.');
+    event.target.value = '';
+    return;
+  }
+  // Ограничение размера (~2 МБ), чтобы Base64 не раздул строку в БД
+  if (file.size > 2 * 1024 * 1024) {
+    alert('Файл слишком большой. Максимум 2 МБ.');
+    event.target.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const base64 = e.target.result; // data:image/...;base64,....
+    document.getElementById('driverAvatarData').value = base64;
+    document.getElementById('driverAvatarPreview').src = base64;
+  };
+  reader.onerror = () => alert('Не удалось прочитать файл.');
+  reader.readAsDataURL(file);
+}
+
+function clearDriverAvatar() {
+  document.getElementById('driverAvatar').value = '';
+  document.getElementById('driverAvatarData').value = '';
+  document.getElementById('driverAvatarPreview').src = DEFAULT_DRIVER_AVATAR;
 }
 
 async function loadTeamSelect() {
@@ -120,6 +162,11 @@ async function editDriver(id) {
   await loadTeamSelect();
   document.getElementById('driverTeam').value = driver.teamId;
   document.getElementById('driverNationality').value = driver.nationality;
+  // Загрузить текущее фото в превью и скрытое поле
+  const currentAvatar = driver.avatar || '';
+  document.getElementById('driverAvatar').value = '';
+  document.getElementById('driverAvatarData').value = currentAvatar;
+  document.getElementById('driverAvatarPreview').src = currentAvatar || DEFAULT_DRIVER_AVATAR;
   document.getElementById('driverModal').classList.add('active');
 }
 
@@ -132,7 +179,8 @@ async function saveDriver(e) {
   const number = parseInt(document.getElementById('driverNumber').value, 10);
   const teamId = document.getElementById('driverTeam').value;
   const nationality = document.getElementById('driverNationality').value.trim();
-  const avatar = `https://via.placeholder.com/150?text=${encodeURIComponent(`${firstName} ${lastName}`.trim().substring(0, 3) || 'PFC')}`;
+  // Фото: Base64 из загрузки (или пусто -> заглушка подставится на сайте)
+  const avatar = document.getElementById('driverAvatarData').value || '';
 
   if (editingId) {
     const driver = drivers.find(d => d.id === editingId);
@@ -143,7 +191,7 @@ async function saveDriver(e) {
       driver.teamId = teamId;
       driver.nationality = nationality;
       driver.class = driver.class || 'F1';
-      driver.avatar = driver.avatar || avatar;
+      driver.avatar = avatar;
       delete driver.name;
     }
   } else {

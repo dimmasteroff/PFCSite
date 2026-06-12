@@ -11,6 +11,40 @@
   font-display: swap;
 }
 
+/* Кастомные шрифты лиги: Gilroy (основной текст) и Formula One (заголовки/нав) */
+@font-face {
+  font-family: 'Gilroy';
+  src: url('../fonts/Gilroy-Regular.woff2') format('woff2'),
+       url('../fonts/Gilroy-Regular.woff') format('woff');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Formula One';
+  src: url('../fonts/FormulaOne-Regular.woff2') format('woff2'),
+       url('../fonts/FormulaOne-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Formula One';
+  src: url('../fonts/FormulaOne-Bold.woff2') format('woff2'),
+       url('../fonts/FormulaOne-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Formula One Wide';
+  src: url('../fonts/FormulaOne-Wide.woff2') format('woff2'),
+       url('../fonts/FormulaOne-Wide.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-page: #f3f3f3;
   --color-surface: #ffffff;
@@ -35,11 +69,13 @@
   --text-primary: var(--color-heading);
   --text-secondary: var(--color-text);
   --text-muted: var(--color-muted);
-  --font-display: 'Titillium Web', Arial, sans-serif;
-  --font-body: 'Titillium Web', Arial, sans-serif;
-  --font-meta: 'Inter', system-ui, sans-serif;
+  /* Иерархия шрифтов: заголовки/нав — Formula One, текст/карточки — Gilroy,
+     логотип — Entocentric, цифры/тайминги — Roboto Mono. */
+  --font-display: 'Formula One', 'Gilroy', 'Titillium Web', sans-serif;
+  --font-body: 'Gilroy', 'Inter', 'Titillium Web', Arial, sans-serif;
+  --font-meta: 'Formula One', 'Gilroy', 'Inter', system-ui, sans-serif;
   --font-mono: 'Roboto Mono', monospace;
-  --font-logo: 'Entocentric', 'Titillium Web', sans-serif;
+  --font-logo: 'Entocentric', 'Formula One Wide', 'Formula One', sans-serif;
   --radius: 8px;
   --space-xs: .35rem;
   --space-sm: .65rem;
@@ -117,8 +153,8 @@ p { margin: 0 0 var(--space-md); color: var(--color-muted); }
 .header-top__links a:hover::after, .main-nav__link:hover::after, .main-nav__link.active::after, .footer__links a:hover::after { width: 100%; }
 .f1tv-badge { border: 1px solid var(--color-border); padding: .2rem .5rem; border-radius: 999px; font-family: var(--font-mono); }
 .header-main { background: var(--color-red); }
-.header-main__inner { min-height: 70px; }
-.logo { display: inline-flex; align-items: center; gap: .6rem; color: #fff; font-family: var(--font-logo); text-transform: uppercase; letter-spacing: .05em; font-size: 1.35rem; font-weight: 700; }
+.header-main__inner { min-height: 70px; justify-content: space-between; }
+.logo { display: inline-flex; align-items: center; gap: .6rem; margin-right: 20px; color: #fff; font-family: var(--font-logo); text-transform: uppercase; letter-spacing: .05em; font-size: 1.35rem; font-weight: 700; }
 .logo img { width: auto; height: 42px; object-fit: contain; }
 .logo--dark { color: var(--color-heading); }
 .main-nav { flex: 1; align-self: stretch; }
@@ -405,4 +441,76 @@ select:focus, input:focus, textarea:focus { border-color: var(--color-red); outl
 @media (max-width: 768px) {
   .f1-clock-widget { order: 3; width: 100%; justify-content: center; }
   .form-row--two { grid-template-columns: 1fr; }
+  /* На мобильных логотип переносится — добавляем нижний отступ */
+  .logo { margin-right: 0; margin-bottom: 10px; }
+}
+
+/* ============================================
+   Блоки главной: последняя новость, результаты
+   гонки, плееры Twitch/TikTok, фото пилотов
+   ============================================ */
+
+/* Фото пилота: обрезка выше торса, как на F1.com */
+.driver-card img,
+.driver-photo,
+.news-featured__image {
+  width: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+/* Последняя новость (featured) */
+.latest-news .news-featured {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-speed) var(--ease-standard), box-shadow var(--transition-speed) var(--ease-standard);
+}
+.latest-news .news-featured:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.news-featured__image { height: 100%; min-height: 320px; background: var(--color-nav); }
+.news-featured__content { padding: clamp(1.25rem, 3vw, 2.5rem); display: flex; flex-direction: column; gap: var(--space-sm); }
+.news-featured__content h3 { font-size: clamp(1.5rem, 2.6vw, 2.4rem); text-transform: none; margin: 0; }
+.news-featured__content .read-more { margin-top: auto; align-self: start; color: var(--color-red); font-family: var(--font-meta); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.news-featured__content .read-more:hover { color: var(--color-red-dark); }
+
+/* Результаты последней гонки */
+.last-race-results .race-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-nav);
+  color: #fff;
+  border-left: 5px solid var(--color-red);
+}
+.last-race-results .race-header .round { font-family: var(--font-mono); font-weight: 700; color: var(--color-red); }
+.last-race-results .race-header .track { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+.last-race-results .race-header .date { margin-left: auto; font-family: var(--font-mono); color: #d5d5da; font-size: .85rem; }
+.f1-timing { width: 100%; border-collapse: collapse; background: var(--color-surface); box-shadow: var(--shadow-sm); }
+.f1-timing th, .f1-timing td { padding: .7rem .9rem; text-align: left; border-bottom: 1px solid var(--color-border); }
+.f1-timing thead th { background: var(--color-surface-soft); font-family: var(--font-meta); font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--color-muted); }
+.f1-timing td.pos, .f1-timing td.points, .f1-timing td.time { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.f1-timing tbody tr { transition: background-color var(--transition-speed) var(--ease-standard); }
+.f1-timing tbody tr:hover { background: var(--color-surface-soft); }
+.f1-timing .team-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: .5rem; vertical-align: middle; }
+.view-all { display: inline-block; margin-top: var(--space-md); color: var(--color-red); font-family: var(--font-meta); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+
+/* Плееры Twitch и TikTok */
+.twitch-section #twitch-embed { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); background: var(--color-nav); min-height: 360px; }
+.twitch-section #twitch-embed iframe { display: block; width: 100%; border: 0; }
+.tiktok-row-embed { display: flex; flex-wrap: wrap; gap: var(--space-lg); justify-content: center; }
+.tiktok-embed { margin: 0 auto; }
+
+@media (max-width: 768px) {
+  .latest-news .news-featured { grid-template-columns: 1fr; }
+  .news-featured__image { min-height: 200px; }
+  .last-race-results .race-header .date { margin-left: 0; width: 100%; }
+  .f1-timing { font-size: .85rem; }
+  .f1-timing th, .f1-timing td { padding: .5rem .55rem; }
 }

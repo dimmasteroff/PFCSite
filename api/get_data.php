@@ -14,6 +14,9 @@ header('Content-Type: application/json; charset=utf-8');
 
 $table = $_GET['table'] ?? '';
 
+// Необязательный параметр ?limit=N — ограничение количества записей (например, новостей).
+$limit = isset($_GET['limit']) ? max(0, (int)$_GET['limit']) : 0;
+
 $allowed = ['drivers', 'teams', 'calendar', 'results', 'news', 'standings', 'all'];
 if (!in_array($table, $allowed, true)) {
     json_response(['status' => 'error', 'message' => 'Недопустимая таблица'], 400);
@@ -29,6 +32,17 @@ try {
             'news'      => get_news(),
             'standings' => get_standings(),
         ]);
+    }
+
+    // ?table=results&detailed=1 -> плоский список с JOIN drivers+teams
+    // (POS, имя пилота, команда, очки). Обычный ?table=results оставлен
+    // без изменений для совместимости с остальным фронтендом.
+    if ($table === 'results' && !empty($_GET['detailed'])) {
+        json_response(get_results_detailed($limit));
+    }
+
+    if ($table === 'news') {
+        json_response(get_news($limit));
     }
 
     $data = call_user_func('get_' . $table);
@@ -141,11 +155,62 @@ function get_results(): array
 }
 
 /**
- * Новости -> массив объектов.
+ * Результаты последней/любой гонки с JOIN на drivers и teams.
+ * Возвращает плоский список строк, удобный для таблицы на главной:
+ * { race_id, round, track, date, finishPos, startPos, points, fastestLap,
+ *   driverId, driverName, teamId, teamName, teamColor }
+ *
+ * @param int $limit 0 = без ограничения
  */
-function get_news(): array
+function get_results_detailed(int $limit = 0): array
 {
-    $rows = db()->query('SELECT * FROM news ORDER BY date DESC')->fetchAll();
+    $sql = 'SELECT r.race_id, r.driver_id, r.grid, r.finish, r.points, r.fastest_lap,
+                   c.round, c.track, c.date,
+                   d.firstName, d.lastName, d.number,
+                   t.id AS team_id, t.name AS team_name, t.color AS team_color
+            FROM results r
+            LEFT JOIN drivers  d ON d.id = r.driver_id
+            LEFT JOIN teams    t ON t.id = d.team_id
+            LEFT JOIN calendar c ON c.id = r.race_id
+            ORDER BY c.round DESC, r.finish ASC';
+    if ($limit > 0) {
+        $sql .= ' LIMIT ' . $limit;
+    }
+
+    $rows = db()->query($sql)->fetchAll();
+    return array_map(function ($r) {
+        $name = trim(($r['firstName'] ?? '') . ' ' . ($r['lastName'] ?? ''));
+        return [
+            'raceId'     => $r['race_id'],
+            'round'      => (int)$r['round'],
+            'track'      => $r['track'] ?? '',
+            'date'       => $r['date'] ?? '',
+            'driverId'   => $r['driver_id'],
+            'driverName' => $name !== '' ? $name : 'N/A',
+            'number'     => $r['number'] !== null ? (int)$r['number'] : null,
+            'teamId'     => $r['team_id'] ?? '',
+            'teamName'   => $r['team_name'] ?? '',
+            'teamColor'  => $r['team_color'] ?? '#888888',
+            'startPos'   => (int)$r['grid'],
+            'finishPos'  => (int)$r['finish'],
+            'points'     => (int)$r['points'],
+            'fastestLap' => (bool)$r['fastest_lap'],
+        ];
+    }, $rows);
+}
+
+/**
+ * Новости -> массив объектов.
+ *
+ * @param int $limit 0 = все новости, иначе максимум N свежих.
+ */
+function get_news(int $limit = 0): array
+{
+    $sql = 'SELECT * FROM news ORDER BY date DESC';
+    if ($limit > 0) {
+        $sql .= ' LIMIT ' . $limit;
+    }
+    $rows = db()->query($sql)->fetchAll();
     return array_map(function ($r) {
         return [
             'id'       => $r['id'],

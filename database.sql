@@ -32,6 +32,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- ------------------------------------------------------------
 -- Пилоты
 -- stats_json хранит { points, wins, podiums, fastestLaps }
+-- ВАЖНО: если БД уже была создана со старой схемой (avatar VARCHAR),
+-- выполните для поддержки Base64-фото один раз:
+--   ALTER TABLE `drivers` MODIFY `avatar` LONGTEXT NULL;
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `drivers` (
   `id` VARCHAR(64) PRIMARY KEY,
@@ -41,7 +44,8 @@ CREATE TABLE IF NOT EXISTS `drivers` (
   `team_id` VARCHAR(64) NULL,
   `class` VARCHAR(20) NOT NULL DEFAULT 'F1',
   `nationality` VARCHAR(10) NOT NULL DEFAULT '',
-  `avatar` VARCHAR(500) NOT NULL DEFAULT '',
+  -- avatar: URL ИЛИ изображение в формате Base64 (data:image/...) — поэтому LONGTEXT
+  `avatar` LONGTEXT NULL,
   `stats_json` TEXT NULL,
   KEY `idx_drivers_team` (`team_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

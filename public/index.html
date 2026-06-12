@@ -12,28 +12,203 @@
 </head>
 <body>
 <header class="site-header">
-  <div class="header-top"><div class="header-top__inner"><div class="header-top__links"><a href="#">Race Series ▼</a><a href="#">Authentics</a><a href="#">Store</a><a href="#">Tickets</a><a href="#">Hospitality</a><a href="#">Experiences</a><span class="f1tv-badge">PFC TV</span></div><div class="header-actions"><a class="btn btn-secondary" href="../admin/login.html">Sign In</a><a class="btn btn-primary" href="#broadcasts">Subscribe</a></div></div></div>
-  <div class="header-main"><div class="header-main__inner"><a href="index.html" class="logo"><img src="../logos/pfcnewlogo.png" alt="PFC1Roblox" onerror="this.style.display='none'">PFC1Roblox</a><button class="burger" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-toggle><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><div class="main-nav__item"><a class="main-nav__link active" href="index.html">Schedule ▼</a><div class="dropdown"><a href="calendar.html">2026 Schedule</a><a href="#upcoming">Next Rounds</a></div></div><div class="main-nav__item"><a class="main-nav__link" href="results.html">Results ▼</a><div class="dropdown"><a href="results.html">Race Results</a><a href="results.html#standings">Timing</a></div></div><div class="main-nav__item"><a class="main-nav__link" href="news.html">News ▼</a><div class="dropdown"><a href="news.html">Latest News</a><a href="#videos">Video</a></div></div><div class="main-nav__item"><a class="main-nav__link" href="drivers.html">Drivers ▼</a><div class="dropdown"><a href="drivers.html">F1 Drivers</a><a href="drivers.html">F2 Drivers</a></div></div><div class="main-nav__item"><a class="main-nav__link" href="teams.html">Teams ▼</a><div class="dropdown"><a href="teams.html">Constructors</a><a href="teams.html">Team Colours</a></div></div><div class="main-nav__item"><a class="main-nav__link" href="#broadcasts">Fantasy & Gaming ▼</a></div><div class="main-nav__item"><a class="main-nav__link" href="../admin/login.html">PFC1 Members' Area</a></div></nav><div class="f1-clock-widget" aria-label="Race time clocks"><div class="user-time"><span class="label">YOUR TIME</span><span class="time" id="userClock">00:00:00</span></div><div class="track-time"><span class="label">TRACK TIME (NEXT RACE)</span><span class="time" id="trackClock">00:00:00</span><span class="track-name" id="nextTrackName">MONACO GP</span></div></div><div class="league-mark" aria-label="Roblox league mark">▣</div></div></div>
+  <div class="header-main"><div class="header-main__inner"><a href="index.html" class="logo"><img src="../logos/pfcnewlogo.png" alt="PFC1Roblox" onerror="this.style.display='none'">PFC1Roblox</a><button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" data-menu-toggle><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Основная навигация"><div class="main-nav__item"><a class="main-nav__link active" href="index.html">Главная</a></div><div class="main-nav__item"><a class="main-nav__link" href="drivers.html">Пилоты</a></div><div class="main-nav__item"><a class="main-nav__link" href="teams.html">Команды</a></div><div class="main-nav__item"><a class="main-nav__link" href="calendar.html">Календарь</a></div><div class="main-nav__item"><a class="main-nav__link" href="results.html">Результаты</a></div><div class="main-nav__item"><a class="main-nav__link" href="news.html">Новости</a></div><div class="main-nav__item"><a class="main-nav__link" href="#pfc-tv">PFC TV</a></div><div class="main-nav__item"><a class="main-nav__link" href="../admin/login.html">Вход</a></div></nav><div class="f1-clock-widget" aria-label="Часы времени гонки"><div class="user-time"><span class="label">ВАШЕ ВРЕМЯ</span><span class="time" id="userClock">00:00:00</span></div><div class="track-time"><span class="label">ВРЕМЯ ТРАССЫ (СЛЕД. ГОНКА)</span><span class="time" id="trackClock">00:00:00</span><span class="track-name" id="nextTrackName">MONACO GP</span></div></div></div></div>
   <div class="race-strip"><div class="race-strip__inner"><div class="race-strip__event"><span class="race-strip__round">R01 | 15-17 MAY</span><span class="race-strip__track">🇲🇨 MONACO &gt;</span></div><span class="race-strip__time mono">MY TIME | 12:34 TRACK TIME</span></div></div>
 </header>
-<div class="twitch-live-banner"><div class="twitch-live-banner__inner"><span class="live-dot" aria-hidden="true"></span><span class="live-text">LIVE NOW: PFC1ROBLOX RACE WEEKEND</span><a href="https://twitch.tv/dimmasteroff_" target="_blank" rel="noopener" class="watch-btn btn btn-primary">WATCH ON TWITCH</a></div></div>
-<main>
-  <section class="hero-layout" aria-label="Featured stories">
-    <article class="hero-feature animate-on-scroll"><img class="hero-feature__image" src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?q=80&w=1800&auto=format&fit=crop" alt="Race car on a circuit"><div class="hero-feature__content"><div class="hero-feature__kicker">Feature</div><h1>5 storylines we're excited about ahead of the Monaco GP</h1><a class="btn btn-primary" href="news.html">Read More</a></div></article>
-    <aside class="side-news" id="sideNews" aria-label="Top news"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></aside>
+<div class="twitch-live-banner"><div class="twitch-live-banner__inner"><span class="live-dot" aria-hidden="true"></span><span class="live-text">В ЭФИРЕ: ГОНОЧНЫЙ УИКЕНД PFC1ROBLOX</span><a href="https://twitch.tv/dimmasteroff_" target="_blank" rel="noopener" class="watch-btn btn btn-primary">СМОТРЕТЬ НА TWITCH</a></div></div>
+<main class="page-content">
+  <!-- ГЕРОЙ: последняя новость крупным блоком + список новостей -->
+  <section class="hero-layout" aria-label="Главные материалы">
+    <article class="hero-feature animate-on-scroll" id="heroFeature">
+      <img class="hero-feature__image" src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?q=80&w=1800&auto=format&fit=crop" alt="">
+      <div class="hero-feature__content"><div class="hero-feature__kicker">Материал</div><h1>PFC1Roblox: гоночный уикенд уже близко</h1><a class="btn btn-primary" href="news.html">Читать далее</a></div>
+    </article>
+    <aside class="side-news" id="sideNews" aria-label="Топ новостей"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></aside>
   </section>
-  <section class="section--tight"><div class="container"><div class="quick-links"><a class="quick-link animate-on-scroll" href="calendar.html"><span class="quick-link__arrow">↗</span><h3>2026 Schedule</h3></a><a class="quick-link animate-on-scroll" href="results.html"><span class="quick-link__arrow">↗</span><h3>2026 Standings</h3></a><a class="quick-link animate-on-scroll" href="news.html"><span class="quick-link__arrow">↗</span><h3>2026 Regulations</h3></a><a class="quick-link animate-on-scroll" href="news.html"><span class="quick-link__arrow">↗</span><h3>Latest News</h3></a></div></div></section>
-  <section class="section"><div class="container"><div class="section-title"><h2>Championship Stats</h2></div><div class="stats-strip"><div class="stat-card animate-on-scroll"><span id="statsDrivers" class="number mono">0</span><p>Пилотов</p></div><div class="stat-card animate-on-scroll"><span id="statsTeams" class="number mono">0</span><p>Команд</p></div><div class="stat-card animate-on-scroll"><span id="statsRounds" class="number mono">0</span><p>Этапов</p></div></div></div></section>
-  <section class="section" id="standings"><div class="container"><div class="section-title"><h2>Top 3 Drivers</h2><a class="btn btn-secondary" href="results.html">Full Results</a></div><div id="topDrivers" class="news-grid"></div></div></section>
-  <section class="section"><div class="container"><div class="section-title"><h2>Latest News</h2><a class="btn btn-secondary" href="news.html">All News</a></div><div id="latestNews" class="news-grid"></div></div></section>
-  <section class="section" id="upcoming"><div class="container"><div class="section-title"><h2>Upcoming Rounds</h2><a class="btn btn-secondary" href="calendar.html">Calendar</a></div><div id="upcomingRounds" class="news-grid"></div></div></section>
-  <section class="section" id="videos"><div class="container"><div class="section-title"><h2>YouTube</h2></div><div class="youtube-grid"><article class="media-card animate-on-scroll"><div class="media-card__thumb"><img src="https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?q=80&w=900&auto=format&fit=crop" alt="Race highlights"><span class="media-card__play">▶</span></div><div class="media-card__body"><h3>Race Weekend Highlights</h3><p class="mono">18 MAY 2026</p></div></article><article class="media-card animate-on-scroll"><div class="media-card__thumb"><img src="https://images.unsplash.com/photo-1493238792000-8113da705763?q=80&w=900&auto=format&fit=crop" alt="Qualifying"><span class="media-card__play">▶</span></div><div class="media-card__body"><h3>Qualifying Lap Breakdown</h3><p class="mono">17 MAY 2026</p></div></article><article class="media-card animate-on-scroll"><div class="media-card__thumb"><img src="https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?q=80&w=900&auto=format&fit=crop" alt="Onboard"><span class="media-card__play">▶</span></div><div class="media-card__body"><h3>Onboard: Pole Lap</h3><p class="mono">16 MAY 2026</p></div></article></div></div></section>
-  <section class="section"><div class="container"><div class="section-title"><h2>TikTok</h2></div><div class="tiktok-row"><article class="tiktok-card"><h3>Start Reaction</h3><p>#PFC1Roblox</p></article><article class="tiktok-card"><h3>Last Lap Drama</h3><p>#RobloxRacing</p></article><article class="tiktok-card"><h3>Pit Wall Cam</h3><p>#RaceWeekend</p></article><article class="tiktok-card"><h3>Podium Moment</h3><p>#MonacoGP</p></article></div></div></section>
+
+  <!-- Быстрые ссылки -->
+  <section class="section--tight"><div class="container"><div class="quick-links"><a class="quick-link animate-on-scroll" href="calendar.html"><span class="quick-link__arrow">↗</span><h3>Календарь 2026</h3></a><a class="quick-link animate-on-scroll" href="results.html"><span class="quick-link__arrow">↗</span><h3>Зачёт 2026</h3></a><a class="quick-link animate-on-scroll" href="drivers.html"><span class="quick-link__arrow">↗</span><h3>Пилоты</h3></a><a class="quick-link animate-on-scroll" href="news.html"><span class="quick-link__arrow">↗</span><h3>Новости</h3></a></div></div></section>
+
+  <!-- ПОСЛЕДНЯЯ НОВОСТЬ (featured) -->
+  <section class="section latest-news"><div class="container"><div class="section-title"><h2>ПОСЛЕДНЯЯ НОВОСТЬ</h2><a class="btn btn-secondary" href="news.html">Все новости</a></div>
+    <div id="featuredNews" class="animate-on-scroll"><div class="skeleton" style="min-height:320px"></div></div>
+  </div></section>
+
+  <!-- Статистика чемпионата -->
+  <section class="section"><div class="container"><div class="section-title"><h2>Статистика чемпионата</h2></div><div class="stats-strip"><div class="stat-card animate-on-scroll"><span id="statsDrivers" class="number mono">0</span><p>Пилотов</p></div><div class="stat-card animate-on-scroll"><span id="statsTeams" class="number mono">0</span><p>Команд</p></div><div class="stat-card animate-on-scroll"><span id="statsRounds" class="number mono">0</span><p>Этапов</p></div></div></div></section>
+
+  <!-- РЕЗУЛЬТАТЫ ПОСЛЕДНЕЙ ГОНКИ -->
+  <section class="section last-race-results"><div class="container"><div class="section-title"><h2>РЕЗУЛЬТАТЫ ПОСЛЕДНЕЙ ГОНКИ</h2><a class="btn btn-secondary" href="results.html">Все результаты</a></div>
+    <div class="race-header" id="lastRaceHeader"><span class="round">R--</span><span class="track">—</span><span class="date"></span></div>
+    <div class="table-container">
+      <table class="f1-timing">
+        <thead><tr><th>POS</th><th>ПИЛОТ</th><th>КОМАНДА</th><th>СТАРТ</th><th>ОЧКИ</th></tr></thead>
+        <tbody id="resultsBody"><tr><td colspan="5" class="text-muted">Загрузка…</td></tr></tbody>
+      </table>
+    </div>
+    <a href="results.html" class="view-all">ВСЕ РЕЗУЛЬТАТЫ →</a>
+  </div></section>
+
+  <!-- Топ-3 пилота -->
+  <section class="section" id="standings"><div class="container"><div class="section-title"><h2>Топ-3 пилота</h2><a class="btn btn-secondary" href="results.html">Полные результаты</a></div><div id="topDrivers" class="news-grid"></div></div></section>
+
+  <!-- Новости списком -->
+  <section class="section"><div class="container"><div class="section-title"><h2>Новости</h2><a class="btn btn-secondary" href="news.html">Все новости</a></div><div id="latestNews" class="news-grid"></div></div></section>
+
+  <!-- Ближайшие этапы -->
+  <section class="section" id="upcoming"><div class="container"><div class="section-title"><h2>Ближайшие этапы</h2><a class="btn btn-secondary" href="calendar.html">Календарь</a></div><div id="upcomingRounds" class="news-grid"></div></div></section>
+
+  <!-- PFC TV: Twitch + TikTok -->
+  <section class="section twitch-section" id="pfc-tv"><div class="container"><div class="section-title"><h2>PFC TV LIVE</h2></div>
+    <div id="twitch-embed" class="animate-on-scroll"></div>
+  </div></section>
+  <section class="section tiktok-section"><div class="container"><div class="section-title"><h2>PFC TIKTOK</h2><a class="btn btn-secondary" href="https://www.tiktok.com/@dimmasteroff" target="_blank" rel="noopener">Открыть TikTok</a></div>
+    <div class="tiktok-row-embed">
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@dimmasteroff" data-unique-id="dimmasteroff" data-embed-type="creator" style="max-width: 780px; min-width: 288px;">
+        <section><a target="_blank" href="https://www.tiktok.com/@dimmasteroff?refer=creator_embed">@dimmasteroff</a></section>
+      </blockquote>
+    </div>
+  </div></section>
 </main>
-<footer class="footer"><div class="footer__inner"><div class="footer__links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Contact</a></div><div class="footer__copy">© 2026 PFC1Roblox</div><div class="footer__social"><a href="https://twitch.tv/dimmasteroff_">Twitch</a><a href="#">YouTube</a><a href="#">TikTok</a></div></div></footer>
-<script src="../js/DataManager.js"></script><script src="../js/PageSync.js"></script>
-<script src="../js/app.js"></script><script src="../js/animations.js"></script><script>
+<footer class="footer"><div class="footer__inner"><div class="footer__links"><a href="#">Политика конфиденциальности</a><a href="#">Условия использования</a><a href="#">Контакты</a></div><div class="footer__copy">© 2026 PFC1Roblox</div><div class="footer__social"><a href="https://twitch.tv/dimmasteroff_" target="_blank" rel="noopener">Twitch</a><a href="https://www.tiktok.com/@dimmasteroff" target="_blank" rel="noopener">TikTok</a><a href="#">YouTube</a></div></div></footer>
+
+<script src="../js/DataManager.js"></script>
+<script src="../js/PageSync.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/animations.js"></script>
+<!-- Плеер Twitch -->
+<script src="https://embed.twitch.tv/embed/v1.js"></script>
+<!-- Плеер TikTok -->
+<script async src="https://www.tiktok.com/embed.js"></script>
+<script>
+// Экранирование пользовательских данных перед вставкой в HTML
 function esc(v){return String(v??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));}
-document.addEventListener('DOMContentLoaded',loadHomeData);async function loadHomeData(){const drivers=await DataManager.load('drivers');const teams=await DataManager.load('teams');const calendar=await DataManager.load('calendar');const news=await DataManager.load('news');const standings=await DataManager.load('standings');document.getElementById('statsDrivers').textContent=drivers.length;document.getElementById('statsTeams').textContent=teams.length;document.getElementById('statsRounds').textContent=calendar.rounds?.length||0;const fallback='https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?q=80&w=500&auto=format&fit=crop';const topNews=news.slice().reverse().slice(0,5);document.getElementById('sideNews').innerHTML=(topNews.length?topNews:[{title:'PFC1Roblox race weekend is ready to go',category:'EXCLUSIVE',date:new Date()}]).map((n,i)=>`<a class="news-card animate-on-scroll" href="news.html"><img class="news-card__image" src="${esc(n.image||fallback)}" alt=""><div><div class="news-card__meta"><span class="badge ${i===0?'badge--exclusive':''}">${esc(n.category||'News')}</span></div><h3 class="news-card__title">${esc(n.title)}</h3></div></a>`).join('');const upcoming=calendar.rounds?.filter(r=>r.status==='upcoming').slice(0,3)||[];document.getElementById('upcomingRounds').innerHTML=upcoming.map(r=>`<div class='card-item animate-on-scroll'><div class='badge badge--dark'>UPCOMING</div><h3>${esc(r.track)}</h3><p class='mono'>${new Date(r.date).toLocaleDateString('ru-RU')} · ${esc(r.trackCountry || '')} · ${esc(r.timezone || 'UTC')}</p></div>`).join('')||'<div class="card-item">Календарь скоро появится</div>';const top=(standings.drivers||[]).slice(0,3);document.getElementById('topDrivers').innerHTML=top.map((s,i)=>{const d=drivers.find(x=>x.id===s.driverId);const t=teams.find(x=>x.id===d?.teamId);return `<div class='card-item animate-on-scroll'><div class='position position-${i+1}'>P${i+1}</div><h3>${esc(PFCApp.getDriverDisplayName(d))}</h3><p>${esc(t?.name||'')}</p><p class='points'>${s.points} PTS</p></div>`}).join('')||'<div class="card-item">Зачёт скоро появится</div>';document.getElementById('latestNews').innerHTML=news.slice().reverse().slice(0,3).map(n=>`<article class='news-card news-card--large animate-on-scroll'><img class='news-card__image' src='${esc(n.image||fallback)}' alt=''><div class='news-card__body'><span class='badge'>${esc(n.category)}</span><h3>${esc(n.title)}</h3><p class='mono'>${new Date(n.date).toLocaleDateString('ru-RU')}</p></div></article>`).join('')||'<div class="card-item">Новостей еще нет</div>';}
+const FALLBACK_NEWS='https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?q=80&w=1200&auto=format&fit=crop';
+
+document.addEventListener('DOMContentLoaded',()=>{loadHomeData();initTwitch();});
 window.addEventListener('dataUpdated',loadHomeData);
-</script></body></html>
+
+async function loadHomeData(){
+  try{
+    // Загружаем все нужные наборы данных параллельно (через get_data.php)
+    const [drivers,teams,calendar,news,standings,results]=await Promise.all([
+      DataManager.load('drivers'),
+      DataManager.load('teams'),
+      DataManager.load('calendar'),
+      DataManager.load('news'),
+      DataManager.load('standings'),
+      DataManager.load('results')
+    ]);
+
+    // Статистика
+    document.getElementById('statsDrivers').textContent=drivers.length;
+    document.getElementById('statsTeams').textContent=teams.length;
+    document.getElementById('statsRounds').textContent=calendar.rounds?.length||0;
+
+    // Новости (свежие сверху)
+    const sorted=news.slice().sort((a,b)=>new Date(b.date||0)-new Date(a.date||0));
+    renderFeaturedNews(sorted[0]);
+    renderSideNews(sorted.slice(0,4));
+    renderLatestNews(sorted.slice(0,6));
+
+    // Топ-3 пилота
+    renderTopDrivers(standings.drivers||[],drivers,teams);
+
+    // Результаты последней гонки
+    renderLastRace(results,calendar,drivers,teams);
+
+    // Ближайшие этапы
+    const upcoming=(calendar.rounds||[]).filter(r=>r.status==='upcoming').slice(0,3);
+    document.getElementById('upcomingRounds').innerHTML=upcoming.map(r=>`<div class='card-item animate-on-scroll'><div class='badge badge--dark'>СКОРО</div><h3>${esc(r.track)}</h3><p class='mono'>${r.date?new Date(r.date).toLocaleDateString('ru-RU'):''} · ${esc(r.trackCountry||'')} · ${esc(r.timezone||'UTC')}</p></div>`).join('')||'<div class="card-item">Календарь скоро появится</div>';
+  }catch(e){
+    console.error('Ошибка загрузки главной:',e);
+    showToast('Не удалось загрузить данные. Попробуйте обновить страницу.');
+  }
+}
+
+function renderFeaturedNews(n){
+  const box=document.getElementById('featuredNews');
+  if(!n){box.innerHTML='<div class="card-item">Новостей пока нет</div>';
+    document.getElementById('heroFeature').classList.add('is-visible');return;}
+  const img=esc(n.image||FALLBACK_NEWS);
+  box.innerHTML=`<a class="news-featured" href="news.html?id=${esc(n.id)}">
+    <img class="news-featured__image" src="${img}" alt="" onerror="this.src='${FALLBACK_NEWS}'">
+    <div class="news-featured__content"><span class="badge badge--exclusive">${esc(n.category||'НОВОСТЬ')}</span>
+      <h3>${esc(n.title)}</h3><p>${esc((n.content||'').slice(0,180))}${(n.content||'').length>180?'…':''}</p>
+      <span class="read-more">ЧИТАТЬ ДАЛЕЕ →</span></div></a>`;
+  // Также обновим крупный hero сверху
+  const hero=document.getElementById('heroFeature');
+  hero.querySelector('.hero-feature__image').src=img;
+  hero.querySelector('.hero-feature__kicker').textContent=n.category||'Материал';
+  hero.querySelector('h1').textContent=n.title||'';
+  hero.querySelector('a.btn').href='news.html?id='+encodeURIComponent(n.id||'');
+}
+
+function renderSideNews(items){
+  const el=document.getElementById('sideNews');
+  if(!items.length){el.innerHTML='<div class="card-item">Новостей пока нет</div>';return;}
+  el.innerHTML=items.map((n,i)=>`<a class="news-card animate-on-scroll" href="news.html?id=${esc(n.id)}"><img class="news-card__image" src="${esc(n.image||FALLBACK_NEWS)}" alt="" onerror="this.src='${FALLBACK_NEWS}'"><div><div class="news-card__meta"><span class="badge ${i===0?'badge--exclusive':''}">${esc(n.category||'Новость')}</span></div><h3 class="news-card__title">${esc(n.title)}</h3></div></a>`).join('');
+}
+
+function renderLatestNews(items){
+  const el=document.getElementById('latestNews');
+  el.innerHTML=items.map(n=>`<a class="news-card news-card--large animate-on-scroll" href="news.html?id=${esc(n.id)}"><img class="news-card__image" src="${esc(n.image||FALLBACK_NEWS)}" alt="" onerror="this.src='${FALLBACK_NEWS}'"><div class="news-card__body"><div class="news-card__meta"><span class="badge">${esc(n.category||'Новость')}</span><span>${n.date?new Date(n.date).toLocaleDateString('ru-RU'):''}</span></div><h3 class="news-card__title">${esc(n.title)}</h3><span class="news-card__read">ЧИТАТЬ →</span></div></a>`).join('')||'<div class="card-item">Новостей пока нет</div>';
+}
+
+function renderTopDrivers(standDrivers,drivers,teams){
+  const top=standDrivers.slice(0,3);
+  const el=document.getElementById('topDrivers');
+  el.innerHTML=top.map((s,i)=>{
+    const d=drivers.find(x=>x.id===s.driverId);
+    const t=teams.find(x=>x.id===d?.teamId);
+    return `<div class='card-item animate-on-scroll'><div class='position position-${i+1}'>P${i+1}</div><h3>${esc(PFCApp.getDriverDisplayName(d))}</h3><p class='mono'>${esc(t?t.name:'')} · ${s.points||0} очк.</p></div>`;
+  }).join('')||'<div class="card-item">Результатов пока нет</div>';
+}
+
+function renderLastRace(results,calendar,drivers,teams){
+  const header=document.getElementById('lastRaceHeader');
+  const body=document.getElementById('resultsBody');
+  const rounds=(calendar.rounds||[]).slice();
+  // Этапы, по которым есть результаты
+  const withResults=rounds.filter(r=>Array.isArray(results[r.id])&&results[r.id].length);
+  if(!withResults.length){
+    header.innerHTML='<span class="round">R--</span><span class="track">Результатов пока нет</span><span class="date"></span>';
+    body.innerHTML='<tr><td colspan="5" class="text-muted">Результаты появятся после первой гонки</td></tr>';
+    return;
+  }
+  // Самый поздний по дате этап с результатами
+  withResults.sort((a,b)=>new Date(b.date||0)-new Date(a.date||0));
+  const race=withResults[0];
+  const rows=results[race.id].slice().sort((a,b)=>(a.finishPos||99)-(b.finishPos||99));
+  header.innerHTML=`<span class="round">R${String(race.round||1).padStart(2,'0')}</span><span class="track">${esc(race.track||'')}</span><span class="date">${race.date?new Date(race.date).toLocaleDateString('ru-RU'):''} · ${esc(race.trackCountry||'')}</span>`;
+  body.innerHTML=rows.map(r=>{
+    const d=drivers.find(x=>x.id===r.driverId);
+    const t=teams.find(x=>x.id===d?.teamId);
+    const dot=t?`<span class="team-dot" style="background:${esc(t.color||'#888')}"></span>`:'';
+    return `<tr><td class="pos">${r.finishPos||'-'}</td><td>${esc(PFCApp.getDriverDisplayName(d))}</td><td>${dot}${esc(t?t.name:'—')}</td><td class="pos">${r.startPos||'-'}</td><td class="points">${r.points||0}</td></tr>`;
+  }).join('');
+}
+
+// Twitch: parent обязан совпадать с доменом, на котором встроен плеер.
+// Берём текущий хост автоматически (localhost при тесте, ваш домен в проде).
+function initTwitch(){
+  const mount=document.getElementById('twitch-embed');
+  if(!mount||typeof Twitch==='undefined'||!Twitch.Embed){
+    if(mount) mount.innerHTML='<p class="text-muted" style="padding:1rem">Плеер Twitch недоступен (заблокирован или нет сети).</p>';
+    return;
+  }
+  const host=location.hostname||'localhost';
+  const parents=Array.from(new Set([host,'localhost','127.0.0.1'].filter(Boolean)));
+  new Twitch.Embed('twitch-embed',{width:'100%',height:480,channel:'dimmasteroff_',layout:'video',parent:parents});
+}
+
+// Простое тост-уведомление об ошибках
+function showToast(msg){
+  let t=document.createElement('div');
+  t.textContent=msg;
+  t.style.cssText='position:fixed;right:18px;bottom:18px;z-index:9999;background:#15151e;color:#fff;padding:.8rem 1.1rem;border-left:4px solid #e10600;box-shadow:0 8px 24px rgba(0,0,0,.3);font-family:Inter,sans-serif;animation:toastSlideIn .3s ease';
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),5000);
+}
+</script>
+</body></html>

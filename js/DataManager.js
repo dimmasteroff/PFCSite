@@ -20,7 +20,7 @@ class DataManager {
   static async load(dataType) {
     try {
       const res = await fetch(`${this.API_BASE}get_data.php?table=${encodeURIComponent(dataType)}`, {
-        credentials: 'same-origin'
+        credentials: 'include'
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
@@ -42,7 +42,7 @@ class DataManager {
       const res = await fetch(`${this.API_BASE}save_data.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
+        credentials: 'include',
         body: JSON.stringify({ table: dataType, data: normalizedData })
       });
       const result = await res.json().catch(() => ({}));
@@ -115,7 +115,7 @@ class DataManager {
           number: driver.number,
           teamId: driver.teamId || '',
           class: driver.class || 'F1',
-          avatar: driver.avatar || driver.photo || `https://via.placeholder.com/150?text=${encodeURIComponent((firstName || 'PFC').slice(0, 3))}`,
+          avatar: driver.avatar || driver.photo || '',
           stats: {
             points: 0,
             wins: 0,
