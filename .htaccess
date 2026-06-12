@@ -1,0 +1,12 @@
+# PFC1Roblox — базовая защита (Apache / Reg.ru shared hosting)
+
+# Кодировка по умолчанию
+AddDefaultCharset UTF-8
+
+# Запретить прямой доступ к дампу БД и любым .sql файлам
+<FilesMatch "\.(sql|md|bat)$">
+  Require all denied
+</FilesMatch>
+
+# Запретить листинг директорий
+Options -Indexes

@@ -1,0 +1,215 @@
+{
+  "drivers": [
+    {
+      "id": "driver_1",
+      "number": 1,
+      "teamId": "team_1",
+      "nationality": "RU",
+      "class": "F1",
+      "avatar": "https://via.placeholder.com/150?text=MP",
+      "stats": {
+        "points": 245,
+        "wins": 3,
+        "podiums": 7,
+        "fastestLaps": 2
+      },
+      "firstName": "Максим",
+      "lastName": "Петров"
+    },
+    {
+      "id": "driver_2",
+      "number": 2,
+      "teamId": "team_1",
+      "nationality": "RU",
+      "class": "F1",
+      "avatar": "https://via.placeholder.com/150?text=IS",
+      "stats": {
+        "points": 198,
+        "wins": 2,
+        "podiums": 5,
+        "fastestLaps": 1
+      },
+      "firstName": "Иван",
+      "lastName": "Смирнов"
+    },
+    {
+      "id": "driver_3",
+      "number": 3,
+      "teamId": "team_2",
+      "nationality": "BY",
+      "class": "F1",
+      "avatar": "https://via.placeholder.com/150?text=AV",
+      "stats": {
+        "points": 156,
+        "wins": 1,
+        "podiums": 4,
+        "fastestLaps": 0
+      },
+      "firstName": "Алексей",
+      "lastName": "Волков"
+    }
+  ],
+  "teams": [
+    {
+      "id": "team_1",
+      "name": "Red Racers",
+      "shortName": "RR",
+      "color": "#E10600",
+      "drivers": [
+        "driver_1",
+        "driver_2"
+      ],
+      "stats": {
+        "points": 443,
+        "wins": 5,
+        "podiums": 12
+      },
+      "logoUrl": "https://via.placeholder.com/100?text=RR",
+      "country": "Россия"
+    },
+    {
+      "id": "team_2",
+      "name": "Blue Thunder",
+      "shortName": "BT",
+      "color": "#00D4FF",
+      "drivers": [
+        "driver_3"
+      ],
+      "stats": {
+        "points": 156,
+        "wins": 1,
+        "podiums": 4
+      },
+      "logoUrl": "https://via.placeholder.com/100?text=BT",
+      "country": "Беларусь"
+    }
+  ],
+  "calendar": {
+    "season": 2026,
+    "rounds": [
+      {
+        "id": "round_1",
+        "round": 1,
+        "track": "Monaco Street Circuit",
+        "date": "2026-03-15T14:00:00Z",
+        "status": "finished",
+        "trackCountry": "Monaco",
+        "timezone": "Europe/Monaco",
+        "class": "F1",
+        "streamLink": "https://twitch.tv/example"
+      },
+      {
+        "id": "round_2",
+        "round": 2,
+        "track": "Silverstone Grand Prix",
+        "date": "2026-04-05T14:00:00Z",
+        "status": "finished",
+        "trackCountry": "United Kingdom",
+        "timezone": "Europe/London",
+        "class": "F1",
+        "streamLink": "https://twitch.tv/example"
+      },
+      {
+        "id": "round_3",
+        "round": 3,
+        "track": "Monza Speed Track",
+        "date": "2026-05-10T14:00:00Z",
+        "status": "live",
+        "trackCountry": "Italy",
+        "timezone": "Europe/Rome",
+        "class": "F1",
+        "streamLink": "https://twitch.tv/example"
+      },
+      {
+        "id": "round_4",
+        "round": 4,
+        "track": "Spa-Francorchamps",
+        "date": "2026-06-07T14:00:00Z",
+        "status": "upcoming",
+        "trackCountry": "Belgium",
+        "timezone": "Europe/Brussels",
+        "class": "F1",
+        "streamLink": "https://twitch.tv/example"
+      }
+    ]
+  },
+  "results": {
+    "round_1": [
+      {
+        "driverId": "driver_1",
+        "startPos": 2,
+        "finishPos": 1,
+        "points": 25,
+        "fastestLap": true
+      },
+      {
+        "driverId": "driver_2",
+        "startPos": 3,
+        "finishPos": 2,
+        "points": 18,
+        "fastestLap": false
+      },
+      {
+        "driverId": "driver_3",
+        "startPos": 1,
+        "finishPos": 3,
+        "points": 15,
+        "fastestLap": false
+      }
+    ]
+  },
+  "news": [
+    {
+      "id": "news_1",
+      "title": "Максим Петров побеждает на Монако!",
+      "category": "Результаты",
+      "content": "В захватывающей гонке на улицах Монако Максим Петров показал блестящее мастерство и одержал первую победу сезона. Его напарник Иван Смирнов финишировал вторым, обеспечив командной Red Racers дублет.",
+      "date": "2026-03-15T16:00:00Z",
+      "author": "Редакция RFL"
+    },
+    {
+      "id": "news_2",
+      "title": "Новый сезон RFL стартует с рекордной аудиторией",
+      "category": "Новости",
+      "content": "Первый этап чемпионата Roblox Formula League собрал рекордное количество зрителей. Более 50 тысяч игроков следили за гонкой в прямом эфире.",
+      "date": "2026-03-16T10:00:00Z",
+      "author": "Редакция RFL"
+    }
+  ],
+  "standings": {
+    "drivers": [
+      {
+        "driverId": "driver_1",
+        "points": 245,
+        "wins": 3,
+        "podiums": 7
+      },
+      {
+        "driverId": "driver_2",
+        "points": 198,
+        "wins": 2,
+        "podiums": 5
+      },
+      {
+        "driverId": "driver_3",
+        "points": 156,
+        "wins": 1,
+        "podiums": 4
+      }
+    ],
+    "constructors": [
+      {
+        "teamId": "team_1",
+        "points": 443,
+        "wins": 5,
+        "podiums": 12
+      },
+      {
+        "teamId": "team_2",
+        "points": 156,
+        "wins": 1,
+        "podiums": 4
+      }
+    ]
+  }
+}

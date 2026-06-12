@@ -1,0 +1,265 @@
+/* ============================================
+   PFC1Roblox - Driver Cards (F1 Style)
+   Карточки пилотов в стиле Formula 1
+   ============================================ */
+
+/* === DRIVER GRID LAYOUT === */
+.drivers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border-color);
+}
+
+@media (max-width: 1200px) {
+  .drivers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .drivers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === F1 STYLE DRIVER CARD === */
+.driver-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              border-color 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.driver-card:hover {
+  transform: scale(1.03);
+  border-color: var(--accent-red);
+  z-index: 10;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* === DRIVER IMAGE SECTION === */
+.driver-image-container {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: #1a1a22;
+}
+
+.driver-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  transition: transform 0.3s ease;
+}
+
+.driver-card:hover .driver-image {
+  transform: scale(1.05);
+}
+
+/* Team color overlay gradient */
+.driver-image-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  pointer-events: none;
+}
+
+/* Default driver placeholder */
+.driver-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a22, #0f0f15);
+  font-size: 4rem;
+  color: var(--text-muted);
+}
+
+/* === DRIVER INFO SECTION === */
+.driver-info {
+  padding: var(--spacing-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* Driver number badge */
+.driver-number-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-red);
+  color: var(--text-primary);
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 700;
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-sharp);
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Driver name */
+.driver-name {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+/* Driver team */
+.driver-team {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Nationality flag */
+.driver-nationality {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.flag-icon {
+  width: 20px;
+  height: 14px;
+  background: #2A2A35;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+
+/* === DRIVER STATS === */
+.driver-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-xs);
+  margin-top: auto;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+}
+
+.driver-stats .stat-item {
+  background: #171722;
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: var(--radius-sharp);
+}
+
+.driver-stats .stat-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.driver-stats .stat-value {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* === TEAM COLOR STRIP === */
+.driver-team-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+/* === RESPONSIVE ADJUSTMENTS === */
+@media (max-width: 1200px) {
+  .driver-image-container {
+    height: 240px;
+  }
+  
+  .driver-name {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .driver-image-container {
+    height: 200px;
+  }
+  
+  .driver-name {
+    font-size: 1.1rem;
+  }
+  
+  .driver-number-badge {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .driver-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .driver-stats .stat-item {
+    padding: var(--spacing-xs);
+  }
+  
+  .driver-stats .stat-label {
+    font-size: 0.55rem;
+  }
+  
+  .driver-stats .stat-value {
+    font-size: 0.9rem;
+  }
+}
+
+/* === ANIMATION FOR LOADING === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.driver-card {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.driver-card:nth-child(1) { animation-delay: 0.05s; }
+.driver-card:nth-child(2) { animation-delay: 0.1s; }
+.driver-card:nth-child(3) { animation-delay: 0.15s; }
+.driver-card:nth-child(4) { animation-delay: 0.2s; }
+.driver-card:nth-child(5) { animation-delay: 0.25s; }
+.driver-card:nth-child(6) { animation-delay: 0.3s; }
+.driver-card:nth-child(7) { animation-delay: 0.35s; }
+.driver-card:nth-child(8) { animation-delay: 0.4s; }
