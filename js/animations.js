@@ -29,20 +29,42 @@
       });
     }
 
-    var animated = Array.prototype.slice.call(document.querySelectorAll('.animate-on-scroll'));
-    animated.forEach(function (el, index) { el.style.transitionDelay = (Math.min(index % 8, 7) * 0.05) + 's'; });
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            io.unobserve(entry.target);
-          }
+    var supportsIO = 'IntersectionObserver' in window;
+    var io = supportsIO ? new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' }) : null;
+
+    var revealIndex = 0;
+    function register(el) {
+      if (el.dataset.revealRegistered) return;
+      el.dataset.revealRegistered = '1';
+      el.style.transitionDelay = (Math.min(revealIndex % 8, 7) * 0.05) + 's';
+      revealIndex++;
+      if (io) io.observe(el);
+      else el.classList.add('is-visible');
+    }
+    function scan(root) {
+      if (root.nodeType !== 1) return;
+      if (root.classList && root.classList.contains('animate-on-scroll')) register(root);
+      if (root.querySelectorAll) {
+        Array.prototype.forEach.call(root.querySelectorAll('.animate-on-scroll'), register);
+      }
+    }
+
+    scan(document);
+
+    // Reveal elements inserted later (e.g. cards rendered after async API fetch).
+    if ('MutationObserver' in window) {
+      new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+          Array.prototype.forEach.call(m.addedNodes, scan);
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
-      animated.forEach(function (el) { io.observe(el); });
-    } else {
-      animated.forEach(function (el) { el.classList.add('is-visible'); });
+      }).observe(document.body, { childList: true, subtree: true });
     }
 
     document.addEventListener('click', function (event) {
